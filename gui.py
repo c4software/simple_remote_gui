@@ -29,7 +29,7 @@ def sub_menu(name, datasources, mode, pending_send_file):
           screen.border(0)
           screen.addstr(2, 2, name, curses.A_BOLD)
           if selected == 4:
-               screen.addstr(4, 4, "0 - Retour", curses.A_STANDOUT) 
+               screen.addstr(4, 4, "0 - Retour", curses.A_STANDOUT)
           else:
                screen.addstr(4, 4, "0 - Retour")
 
@@ -43,7 +43,7 @@ def sub_menu(name, datasources, mode, pending_send_file):
                x = x+1
                u = u+1
 
-          screen.refresh()            
+          screen.refresh()
           x =  screen.getch()
           if x == 258 or x == ord('j'):
                # Fleche vers le bas
@@ -82,7 +82,7 @@ selected = 3
 while x != ord('q'):
      try:
           screen = curses.initscr()
-          screen.keypad(1) 
+          screen.keypad(1)
           maxY, maxX = screen.getmaxyx()
           code = 255 # code de sorti de l'appli
           screen.clear()
@@ -156,7 +156,7 @@ while x != ord('q'):
                               values = elem[x][key]
                          except:
                               pass
-                   
+
                     if type(values) is list:
                          # Sous menu necessaire
                          sub_menu(key,values, mode, pending_send_file)
@@ -164,13 +164,13 @@ while x != ord('q'):
                     else:
                          curses.endwin()
                          if mode == "SSH":
-                              system("ssh "+values)     
+                              system("ssh "+values)
                          else:
                               system("scp "+pending_send_file+" "+values+":")
                except:
                     pass
           else:
-               if x == ord('a'):   
+               if x == ord('a'):
                     ip = get_param("Adresse IP :")
                     if ip is not "":
                          utilisateur = get_param("Utilisateur :")
@@ -181,8 +181,9 @@ while x != ord('q'):
                               system("ssh "+ip)
                if x == ord('c'):
                     if mode == "SSH":
-                         mode = "SCP"
                          pending_send_file = " ".join(FileListing().run())
+                         if pending_send_file:
+                             mode = "SCP"
                          screen = curses.initscr()
                          curses.raw()
                     else:
