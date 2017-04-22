@@ -84,7 +84,7 @@ while x != ord('q'):
           screen = curses.initscr()
           screen.keypad(1)
           maxY, maxX = screen.getmaxyx()
-          code = 255 # code de sorti de l'appli
+          code = 0 # code de sorti de l'appli
           screen.clear()
           screen.border(0)
 
@@ -110,14 +110,14 @@ while x != ord('q'):
           screen.addch(maxY-2, 5, curses.ACS_VLINE)
           screen.addstr(maxY-2, 7, "a - Autre SSH")
           screen.addch(maxY-2, 21, curses.ACS_VLINE)
+
           if mode == "SSH":
                screen.addstr(maxY-2, 23, "c - SCP")
           else:
                screen.addstr(maxY-2, 23, "c - SSH")
+
           screen.addch(maxY-2, 31, curses.ACS_VLINE)
-          screen.addstr(maxY-2, 33, "l - Logout")
-          screen.addch(maxY-2, 44, curses.ACS_VLINE)
-          screen.addstr(maxY-2, 46, "q - Shell")
+          screen.addstr(maxY-2, 33, "q - Quit")
 
           if mode == "SCP":
                screen.addch(maxY-2, 56, curses.ACS_VLINE)
@@ -139,6 +139,7 @@ while x != ord('q'):
                if selected-3 < 0:
                     selected = len(menu)+2
           elif x != ord('a') and x != ord('l') and x != ord('q') and x != ord('c'):
+               # Gestion de la navigation dans les menus
                try:
                     if x == ord('\n'):
                          # Si touche entrer alors on converti l'indice en position
@@ -188,11 +189,6 @@ while x != ord('q'):
                          curses.raw()
                     else:
                          mode = "SSH"
-               if x == ord('l'):
-                    # Sortie OK alors ==> Logout (si lance avec && logout
-                    curses.endwin()
-                    code = 0
-                    x = ord('q')
      except KeyboardInterrupt:
           curses.endwin()
           code = 0
