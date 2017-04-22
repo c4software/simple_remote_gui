@@ -70,10 +70,9 @@ def sub_menu(name, datasources, mode, pending_send_file):
                     x = chr(x)
                 curses.endwin()
                 if mode == 'SSH':
-                    system('ssh ' + datasources[int(x) - 1][1])
+                    system('ssh {0}'.format(datasources[int(x) - 1][1]))
                 else:
-                    system('scp ' + pending_send_file + ' '
-                           + datasources[int(x) - 1][1] + ':')
+                    system('scp {0} {1}:'.format(pending_send_file, datasources[int(x) - 1][1]))
             except:
                 pass
 
