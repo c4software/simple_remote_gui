@@ -187,6 +187,7 @@ while x != ord('q'):
                              mode = "SCP"
                          screen = curses.initscr()
                          curses.raw()
+                         continue
                     else:
                          mode = "SSH"
      except KeyboardInterrupt:
