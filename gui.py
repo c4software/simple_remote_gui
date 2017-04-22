@@ -120,10 +120,9 @@ while x != ord('q'):
 
           if mode == "SCP":
                screen.addch(maxY-2, 56, curses.ACS_VLINE)
-               if len(pending_send_file) > maxX-60:
-                    screen.addstr(maxY-2, 58, "Pending : {0}..".format(pending_send_file[:maxX-60]), curses.A_BOLD)
-               else:
-                    screen.addstr(maxY-2, 58, "Pending : {0}".format(pending_send_file), curses.A_BOLD)
+               pending_send_file_text = (pending_send_file[:60] + '..') if len(pending_send_file) > 60 else pending_send_file
+               screen.addstr(maxY-2, 58, "Pending : {0}".format(pending_send_file_text), curses.A_BOLD)
+
           screen.refresh()
 
           x =  screen.getch()
@@ -141,7 +140,7 @@ while x != ord('q'):
                # Gestion de la navigation dans les menus
                try:
                     if x == ord('\n'):
-                         # Si touche entrer alors on converti l'indice en position
+                         # Touche entrer alors on converti l'indice en position
                          x = int(selected-3)
                          key = list(menu[x].keys())[0]
                          values = menu[x][key]
