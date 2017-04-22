@@ -18,26 +18,26 @@ class FileListing:
     outputLines = []
     screen = None
 
-    mypath = "../"
-            
+    mypath = "."
+
     def __init__(self):
         self.screen = curses.initscr()
         curses.noecho()
         curses.cbreak()
-        self.screen.keypad(1) 
+        self.screen.keypad(1)
         self.screen.border(0)
         self.topLineNum = 0
         self.highlightLineNum = 0
         self.markedLineNums = []
         self.getOutputLines()
         #self.run()
-        
+
     def run(self):
         c = ""
         while c != self.ESC_KEY:
             self.displayScreen()
             c = self.screen.getch()
-            if c == curses.KEY_UP: 
+            if c == curses.KEY_UP:
                 self.updown(self.UP)
             elif c == curses.KEY_DOWN:
                 self.updown(self.DOWN)
@@ -53,7 +53,7 @@ class FileListing:
         else:
             self.markedLineNums.append(linenum)
 
-    def getOutputLines(self):   
+    def getOutputLines(self):
         self.outputLines = [ f for f in listdir(self.mypath) if isfile(join(self.mypath,f)) ]
         self.nOutputLines = len(self.outputLines)
 
@@ -74,7 +74,7 @@ class FileListing:
 
             line = '%s %s' % (prefix, line,)
 
-            # highlight current line            
+            # highlight current line
             if index != self.highlightLineNum:
                 self.screen.addstr(index+2, 4, line)
             else:
@@ -87,7 +87,7 @@ class FileListing:
 
         # paging
         if increment == self.UP and self.highlightLineNum == 0 and self.topLineNum != 0:
-            self.topLineNum += self.UP 
+            self.topLineNum += self.UP
             return
         elif increment == self.DOWN and nextLineNum == curses.LINES and (self.topLineNum+curses.LINES) != self.nOutputLines:
             self.topLineNum += self.DOWN
