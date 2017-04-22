@@ -137,7 +137,7 @@ while x != ord('q'):
                selected += - 1
                if selected-3 < 0:
                     selected = len(menu)+2
-          elif x != ord('a') and x != ord('l') and x != ord('q') and x != ord('c'):
+          elif x not in [ord('a'), ord('l'), ord('q'), ord('c')]:
                # Gestion de la navigation dans les menus
                try:
                     if x == ord('\n'):
