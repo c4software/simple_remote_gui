@@ -119,10 +119,6 @@ while x != ord('q'):
           screen.addch(maxY-2, 44, curses.ACS_VLINE)
           screen.addstr(maxY-2, 46, "q - Shell")
 
-          if update_available:
-               screen.addch(maxY-2, 56, curses.ACS_VLINE)
-               screen.addstr(maxY-2, 58, "Nvl Version disp", curses.A_REVERSE)
-
           if mode == "SCP":
                screen.addch(maxY-2, 56, curses.ACS_VLINE)
                if len(pending_send_file) > maxX-60:
