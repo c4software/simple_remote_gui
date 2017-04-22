@@ -16,10 +16,9 @@ def get_param(prompt_string):
           win.border(0)
           win.addstr(2, 2, prompt_string)
           win.refresh()
-          input = win.getstr(2, len(prompt_string)+5, 60)
+          return win.getstr(2, len(prompt_string)+5, 60)
      except:
           return ""
-     return input
 
 def sub_menu(name, datasources, mode, pending_send_file):
      x = 0
@@ -172,9 +171,9 @@ while x != ord('q'):
                     pass
           else:
                if x == ord('a'):
-                    ip = get_param("Adresse IP :")
+                    ip = str(get_param("Adresse IP :"), 'utf-8')
                     if ip is not "":
-                         utilisateur = get_param("Utilisateur :")
+                         utilisateur = str(get_param("Utilisateur :"),'utf-8')
                          curses.endwin()
                          if utilisateur is not "":
                               system("ssh "+utilisateur+"@"+ip)
@@ -194,5 +193,6 @@ while x != ord('q'):
           curses.endwin()
           code = 0
           x = ord('q')
+
 curses.endwin()
 exit(code)
