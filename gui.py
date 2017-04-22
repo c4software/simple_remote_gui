@@ -83,27 +83,20 @@ def sub_menu(name,datasources,mode,pending_send_file):
 x = 0
 mode = 'SSH'
 pending_send_file = ''
-selected = 3
+selected = 4
 
 while x != ord('q'):
     try:
         screen = curses.initscr()
         screen.keypad(1)
         (maxY, maxX) = screen.getmaxyx()
-        code = 0  # code de sorti de l'appli
         screen.clear()
         screen.border(0)
 
         screen.addstr(2, 2, 'Remote GUI', curses.A_BOLD)
         i = 4
         for elem in menu:
-            if i == selected:
-                screen.addstr(i, 4, str(list(elem.keys())[0]) + ' - '
-                              + str(list(elem[list(elem.keys())[0]].keys())[0]),
-                              curses.A_STANDOUT)
-            else:
-                screen.addstr(i, 4, str(list(elem.keys())[0]) + ' - '
-                              + str(list(elem[list(elem.keys())[0]].keys())[0]))
+            screen.addstr(i, 4, str(list(elem.keys())[0]) + ' - ' + str(list(elem[list(elem.keys())[0]].keys())[0]), (curses.A_STANDOUT if i == selected  else 0))
             i = i + 1
 
         # Affichage du bas de la fenetre
@@ -130,12 +123,8 @@ while x != ord('q'):
 
         if mode == 'SCP':
             screen.addch(maxY - 2, 56, curses.ACS_VLINE)
-            pending_send_file_text = (pending_send_file[:60] + '..'
-                     if len(pending_send_file)
-                    > 60 else pending_send_file)
-            screen.addstr(maxY - 2, 58,
-                          'Pending : {0}'.format(pending_send_file_text),
-                          curses.A_BOLD)
+            pending_send_file_text = (pending_send_file[:60] + '..' if len(pending_send_file) > 60 else pending_send_file)
+            screen.addstr(maxY - 2, 58, 'Pending : {0}'.format(pending_send_file_text), curses.A_BOLD)
 
         screen.refresh()
 
@@ -143,19 +132,19 @@ while x != ord('q'):
         if x == 258 or x == ord('j'):
             # Fleche vers le bas
             selected += 1
-            if selected - 3 >= len(menu):
-                selected = 3
+            if selected - 4 >= len(menu):
+                selected = 4
         elif x == 259 or x == ord('k'):
             # Fleche vers le haut
             selected += -1
-            if selected - 3 < 0:
+            if selected - 4 < 0:
                 selected = len(menu) + 2
         elif x not in [ord('a'), ord('l'), ord('q'), ord('c')]:
             # Gestion de la navigation dans les menus
             try:
                 if x == ord('\n'):
                     # Touche entrer alors on converti l'indice en position
-                    x = int(selected - 3)
+                    x = int(selected - 4)
                     key = list(menu[x].keys())[0]
                     values = menu[x][key]
                     key = list(menu[x][key].keys())[0]
@@ -205,8 +194,7 @@ while x != ord('q'):
                     mode = 'SSH'
     except KeyboardInterrupt:
         curses.endwin()
-        code = 0
         x = ord('q')
 
 curses.endwin()
-exit(code)
+exit(0)
