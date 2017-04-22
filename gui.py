@@ -81,6 +81,7 @@ selected = 3
 while x != ord('q'):
      try:
           screen = curses.initscr()
+          screen.refresh()
           screen.keypad(1)
           maxY, maxX = screen.getmaxyx()
           code = 0 # code de sorti de l'appli
