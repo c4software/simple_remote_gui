@@ -25,7 +25,7 @@ def get_param(prompt_string):
         return ''
 
 
-def sub_menu(name,datasources,mode,pending_send_file):
+def sub_menu(name, datasources, mode, pending_send_file):
     x = 0
     selected = 5
     while x != ord('0'):
