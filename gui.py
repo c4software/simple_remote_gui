@@ -79,18 +79,6 @@ mode = "SSH"
 pending_send_file = ""
 selected = 3
 
-update_available = False
-version = "1.1"
-
-# Verification de la mise a jour
-try:
-     f = open("/tmp/gui_version.txt", "r")
-     last_version = f.read().rstrip()
-     if version != last_version:
-          update_available = True
-except:
-     update_available = False
-
 while x != ord('q'):
      try:
           screen = curses.initscr()
@@ -100,7 +88,7 @@ while x != ord('q'):
           screen.clear()
           screen.border(0)
 
-          screen.addstr(2, 2, "Selection", curses.A_BOLD)
+          screen.addstr(2, 2, "Remote GUI", curses.A_BOLD)
           i = 3
           for elem in menu:
                if i == selected:
