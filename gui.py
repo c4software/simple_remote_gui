@@ -172,10 +172,10 @@ while x != ord('q'):
           else:
                if x == ord('a'):
                     ip = str(get_param("Adresse IP :"), 'utf-8')
-                    if ip is not "":
+                    if ip:
                          utilisateur = str(get_param("Utilisateur :"),'utf-8')
                          curses.endwin()
-                         if utilisateur is not "":
+                         if utilisateur:
                               system("ssh "+utilisateur+"@"+ip)
                          else:
                               system("ssh "+ip)
