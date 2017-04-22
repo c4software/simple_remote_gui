@@ -92,9 +92,9 @@ while x != ord('q'):
           i = 3
           for elem in menu:
                if i == selected:
-                    screen.addstr(i, 4, str(elem.keys()[0])+" - "+str(elem[elem.keys()[0]].keys()[0]), curses.A_STANDOUT)
+                    screen.addstr(i, 4, str(list(elem.keys())[0])+" - "+str(list(elem[list(elem.keys())[0]].keys())[0]), curses.A_STANDOUT)
                else:
-                    screen.addstr(i, 4, str(elem.keys()[0])+" - "+str(elem[elem.keys()[0]].keys()[0]))
+                    screen.addstr(i, 4, str(list(elem.keys())[0])+" - "+str(list(elem[list(elem.keys())[0]].keys())[0]))
                i = i+1
 
           # Affichage du bas de la fenetre
@@ -143,16 +143,16 @@ while x != ord('q'):
                     if x == ord('\n'):
                          # Si touche entrer alors on converti l'indice en position
                          x = int(selected-3)
-                         key = menu[x].keys()[0]
+                         key = list(menu[x].keys())[0]
                          values = menu[x][key]
-                         key = menu[x][key].keys()[0]
+                         key = list(menu[x][key].keys())[0]
                          values = values[key]
                     else:
                          # Sinon on prend la valeur utilisateurs
                          try:
                               x = chr(x)
-                              elem = (item for item in menu if x in item).next()
-                              key = elem[x].keys()[0]
+                              elem = next((item for item in menu if x in item))
+                              key = list(elem[x].keys())[0]
                               values = elem[x][key]
                          except:
                               pass
