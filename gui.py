@@ -25,12 +25,7 @@ def get_param(prompt_string):
         return ''
 
 
-def sub_menu(
-    name,
-    datasources,
-    mode,
-    pending_send_file,
-    ):
+def sub_menu(name,datasources,mode,pending_send_file):
     x = 0
     selected = 5
     while x != ord('0'):
@@ -56,16 +51,12 @@ def sub_menu(
         screen.refresh()
         x = screen.getch()
         if x == 258 or x == ord('j'):
-
-               # Fleche vers le bas
-
+           # Fleche vers le bas
             selected += 1
             if selected - 5 >= len(datasources):
                 selected = 4
         elif x == 259 or x == ord('k'):
-
-               # Fleche vers le haut
-
+           # Fleche vers le haut
             selected += -1
             if selected - 4 < 0:
                 selected = len(datasources) + 4
@@ -84,7 +75,6 @@ def sub_menu(
                     system('scp ' + pending_send_file + ' '
                            + datasources[int(x) - 1][1] + ':')
             except:
-
                 pass
 
     return 0
@@ -116,8 +106,7 @@ while x != ord('q'):
                               + str(list(elem[list(elem.keys())[0]].keys())[0]))
             i = i + 1
 
-          # Affichage du bas de la fenetre
-
+        # Affichage du bas de la fenetre
         for u in range(maxX):
             if u == 0:
                 screen.addch(maxY - 3, u, curses.ACS_LTEE)
@@ -152,37 +141,27 @@ while x != ord('q'):
 
         x = screen.getch()
         if x == 258 or x == ord('j'):
-
-               # Fleche vers le bas
-
+            # Fleche vers le bas
             selected += 1
             if selected - 3 >= len(menu):
                 selected = 3
         elif x == 259 or x == ord('k'):
-
-               # Fleche vers le haut
-
+            # Fleche vers le haut
             selected += -1
             if selected - 3 < 0:
                 selected = len(menu) + 2
         elif x not in [ord('a'), ord('l'), ord('q'), ord('c')]:
-
-               # Gestion de la navigation dans les menus
-
+            # Gestion de la navigation dans les menus
             try:
                 if x == ord('\n'):
-
-                         # Touche entrer alors on converti l'indice en position
-
+                    # Touche entrer alors on converti l'indice en position
                     x = int(selected - 3)
                     key = list(menu[x].keys())[0]
                     values = menu[x][key]
                     key = list(menu[x][key].keys())[0]
                     values = values[key]
                 else:
-
-                         # Sinon on prend la valeur utilisateurs
-
+                    # Sinon on prend la valeur utilisateurs
                     try:
                         x = chr(x)
                         elem = next(item for item in menu if x in item)
@@ -192,9 +171,7 @@ while x != ord('q'):
                         pass
 
                 if type(values) is list:
-
-                         # Sous menu necessaire
-
+                    # Sous menu necessaire
                     sub_menu(key, values, mode, pending_send_file)
                     curses.endwin()
                 else:
@@ -210,8 +187,7 @@ while x != ord('q'):
             if x == ord('a'):
                 ip = str(get_param('Adresse IP :'), 'utf-8')
                 if ip:
-                    utilisateur = str(get_param('Utilisateur :'),
-                            'utf-8')
+                    utilisateur = str(get_param('Utilisateur :'), 'utf-8')
                     curses.endwin()
                     if utilisateur:
                         system('ssh {0}@{1}'.format(utilisateur, ip))
