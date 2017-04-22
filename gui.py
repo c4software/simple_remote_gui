@@ -81,7 +81,6 @@ selected = 3
 while x != ord('q'):
      try:
           screen = curses.initscr()
-          screen.refresh()
           screen.keypad(1)
           maxY, maxX = screen.getmaxyx()
           code = 0 # code de sorti de l'appli
@@ -89,7 +88,7 @@ while x != ord('q'):
           screen.border(0)
 
           screen.addstr(2, 2, "Remote GUI", curses.A_BOLD)
-          i = 3
+          i = 4
           for elem in menu:
                if i == selected:
                     screen.addstr(i, 4, str(list(elem.keys())[0])+" - "+str(list(elem[list(elem.keys())[0]].keys())[0]), curses.A_STANDOUT)
