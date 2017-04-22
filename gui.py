@@ -51,12 +51,12 @@ def sub_menu(name, datasources, mode, pending_send_file):
         screen.refresh()
         x = screen.getch()
         if x == 258 or x == ord('j'):
-           # Fleche vers le bas
+            # Fleche vers le bas
             selected += 1
             if selected - 5 >= len(datasources):
                 selected = 4
         elif x == 259 or x == ord('k'):
-           # Fleche vers le haut
+            # Fleche vers le haut
             selected += -1
             if selected - 4 < 0:
                 selected = len(datasources) + 4
