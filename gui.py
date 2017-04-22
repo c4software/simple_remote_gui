@@ -121,9 +121,9 @@ while x != ord('q'):
           if mode == "SCP":
                screen.addch(maxY-2, 56, curses.ACS_VLINE)
                if len(pending_send_file) > maxX-60:
-                    screen.addstr(maxY-2, 58, "Pending : "+(pending_send_file[:maxX-60] + '..'), curses.A_BOLD)
+                    screen.addstr(maxY-2, 58, "Pending : {0}..".format(pending_send_file[:maxX-60]), curses.A_BOLD)
                else:
-                    screen.addstr(maxY-2, 58, "Pending : "+pending_send_file, curses.A_BOLD)
+                    screen.addstr(maxY-2, 58, "Pending : {0}".format(pending_send_file), curses.A_BOLD)
           screen.refresh()
 
           x =  screen.getch()
@@ -164,21 +164,21 @@ while x != ord('q'):
                     else:
                          curses.endwin()
                          if mode == "SSH":
-                              system("ssh "+values)
+                              system("ssh {0}".format(values))
                          else:
-                              system("scp "+pending_send_file+" "+values+":")
+                              system("scp {0} {1}:".format(pending_send_file, values))
                except:
                     pass
           else:
                if x == ord('a'):
                     ip = str(get_param("Adresse IP :"), 'utf-8')
                     if ip:
-                         utilisateur = str(get_param("Utilisateur :"),'utf-8')
+                         utilisateur = str(get_param("Utilisateur :"), 'utf-8')
                          curses.endwin()
                          if utilisateur:
-                              system("ssh "+utilisateur+"@"+ip)
+                              system("ssh {0}@{1}".format(utilisateur, ip))
                          else:
-                              system("ssh "+ip)
+                              system("ssh {0}".format(ip))
                if x == ord('c'):
                     if mode == "SSH":
                          pending_send_file = " ".join(FileListing().run())
