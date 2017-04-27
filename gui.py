@@ -8,6 +8,10 @@ from sys import exit
 from param import menu
 from file_listing import FileListing
 
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--title', help='Menu title', default="Remote GUI")
+args = parser.parse_args()
 
 def get_param(prompt_string):
     try:
@@ -92,7 +96,7 @@ while x != ord('q'):
         screen.clear()
         screen.border(0)
 
-        screen.addstr(2, 2, 'Remote GUI', curses.A_BOLD)
+        screen.addstr(2, 2, args.title, curses.A_BOLD)
         i = 4
         for elem in menu:
             screen.addstr(i, 4, str(list(elem.keys())[0]) + ' - ' + str(list(elem[list(elem.keys())[0]].keys())[0]), (curses.A_STANDOUT if i == selected  else 0))
