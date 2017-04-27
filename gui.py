@@ -32,7 +32,7 @@ def get_param(prompt_string):
 def sub_menu(name, datasources, mode, pending_send_file):
     x = 0
     selected = 5
-    while x != ord('0'):
+    while x not in [ord('0'), ord("q")]:
         screen.clear()
         screen.border(0)
         screen.addstr(2, 2, name, curses.A_BOLD)
@@ -64,7 +64,7 @@ def sub_menu(name, datasources, mode, pending_send_file):
             selected += -1
             if selected - 4 < 0:
                 selected = len(datasources) + 4
-        elif x != ord('0'):
+        elif x not in [ord('0'), ord("q")]:
             try:
                 if x == ord('\n'):
                     x = selected - 4
