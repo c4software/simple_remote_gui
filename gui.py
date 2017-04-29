@@ -15,11 +15,7 @@ args = parser.parse_args()
 
 def get_param(prompt_string):
     try:
-        begin_x = 20
-        begin_y = 7
-        height = 5
-        width = 40
-        win = curses.newwin(height, width, begin_y, begin_x)
+        win = curses.newwin(5, 40, 7, 20)
         screen.clear()
         win.border(0)
         win.addstr(2, 2, prompt_string)
@@ -113,7 +109,7 @@ while x != ord('q'):
 
         screen.addstr(maxY - 2, 1, mode, curses.A_BOLD)
         screen.addch(maxY - 2, 5, curses.ACS_VLINE)
-        screen.addstr(maxY - 2, 7, 'a - Autre SSH')
+        screen.addstr(maxY - 2, 7, 'a - Via IP')
         screen.addch(maxY - 2, 21, curses.ACS_VLINE)
 
         if mode == 'SSH':
@@ -127,7 +123,7 @@ while x != ord('q'):
         if mode == 'SCP':
             screen.addch(maxY - 2, 56, curses.ACS_VLINE)
             pending_send_file_text = (pending_send_file[:60] + '..' if len(pending_send_file) > 60 else pending_send_file)
-            screen.addstr(maxY - 2, 58, 'Pending : {0}'.format(pending_send_file_text), curses.A_BOLD)
+            screen.addstr(maxY - 2, 58, 'Attente : {0}'.format(pending_send_file_text), curses.A_BOLD)
 
         screen.refresh()
 
@@ -186,6 +182,7 @@ while x != ord('q'):
                     else:
                         system('ssh {0}'.format(ip))
             if x == ord('c'):
+                # Passage entre les modes SSH / SCP
                 if mode == 'SSH':
                     pending_send_file = ' '.join(FileListing().run())
                     if pending_send_file:
