@@ -27,7 +27,7 @@ def get_param(prompt_string):
 mode = 'SSH'
 pending_send_file = ''
 
-def draw_menu(menu_name, datasource):
+def draw_menu(menu_name, datasource, sub_menu=False):
     global mode, pending_send_file
     selected = 4
     x = 0
@@ -40,6 +40,7 @@ def draw_menu(menu_name, datasource):
             screen.border(0)
 
             screen.addstr(2, 2, menu_name, curses.A_BOLD)
+
             i = 4
             for elem in datasource:
                 screen.addstr(i, 4, str(list(elem.keys())[0]) + ' - ' + str(list(elem[list(elem.keys())[0]].keys())[0]), (curses.A_STANDOUT if i == selected  else 0))
@@ -83,8 +84,8 @@ def draw_menu(menu_name, datasource):
             elif x == 259 or x == ord('k'):
                 # Fleche vers le haut
                 selected += -1
-                if selected - 4 < 0:
-                    selected = len(datasource) + 2
+                if selected - 4 <= 0:
+                    selected = 4
             elif x not in [ord('a'), ord('l'), ord('q'), ord('c')]:
                 # Gestion de la navigation dans les menus
                 try:
@@ -98,7 +99,7 @@ def draw_menu(menu_name, datasource):
 
                     if type(values) is list:
                         # Sous menu necessaire
-                        draw_menu(title, values)
+                        draw_menu(title, values, True)
                         curses.endwin()
                     else:
                         curses.endwin()
