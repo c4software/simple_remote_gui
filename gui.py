@@ -60,12 +60,9 @@ def draw_menu(menu_name, datasource, sub_menu=False):
             screen.addstr(maxY - 2, 7, 'a - Via IP')
             screen.addch(maxY - 2, 21, curses.ACS_VLINE)
 
-            if mode == 'SSH':
-                screen.addstr(maxY - 2, 23, 'c - SCP')
-            else:
-                screen.addstr(maxY - 2, 23, 'c - SSH')
-
+            screen.addstr(maxY - 2, 23, 'c - {0}'.format(mode))
             screen.addch(maxY - 2, 31, curses.ACS_VLINE)
+            
             if sub_menu:
                 screen.addstr(maxY - 2, 33, 'q - Retour')
             else:
