@@ -31,7 +31,7 @@ def draw_menu(menu_name, datasource, sub_menu=False):
     global mode, pending_send_file
     selected = 4
     x = 0
-    while x != ord("q"):
+    while x not in [ord("q"), 27]: # 27 is ESC_KEY
         try:
             screen = curses.initscr()
             screen.keypad(1)
@@ -62,7 +62,7 @@ def draw_menu(menu_name, datasource, sub_menu=False):
 
             screen.addstr(maxY - 2, 23, 'c - {0}'.format(mode))
             screen.addch(maxY - 2, 31, curses.ACS_VLINE)
-            
+
             if sub_menu:
                 screen.addstr(maxY - 2, 33, 'q - Retour')
             else:
@@ -86,7 +86,7 @@ def draw_menu(menu_name, datasource, sub_menu=False):
                 selected += -1
                 if selected - 4 <= 0:
                     selected = 4
-            elif x not in [ord('a'), ord('l'), ord('q'), ord('c')]:
+            elif x not in [ord('a'), ord('l'), ord('q'), ord('c'), 27]: # 27 is ESC_KEY
                 # Gestion de la navigation dans les menus
                 try:
                     if x == ord('\n'):
