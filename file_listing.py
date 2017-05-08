@@ -30,7 +30,7 @@ class FileListing:
         self.highlightLineNum = 0
         self.markedLineNums = []
         self.getOutputLines()
-        #self.run()
+        (self.maxY, self.maxX) = self.screen.getmaxyx()
 
     def run(self):
         c = ""
@@ -79,6 +79,17 @@ class FileListing:
                 self.screen.addstr(index+2, 4, line)
             else:
                 self.screen.addstr(index+2, 4, line, curses.A_BOLD)
+
+        # Affichage bas de la fenetre
+        for u in range(self.maxX):
+            if u == 0:
+                self.screen.addch(self.maxY - 3, u, curses.ACS_LTEE)
+            elif u == self.maxX - 1:
+                self.screen.addch(self.maxY - 3, u, curses.ACS_RTEE)
+            else:
+                self.screen.addch(self.maxY - 3, u, curses.ACS_HLINE)
+        self.screen.addstr(self.maxY - 2, 1, 'ESC - Retour')
+        
         self.screen.refresh()
 
     # move highlight up/down one line
