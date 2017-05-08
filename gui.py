@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from os import system
+from os import system, environ
 import curses
 from sys import exit
 
@@ -135,6 +135,7 @@ def draw_menu(menu_name, datasource, sub_menu=False):
             x = ord('q')
 
 if __name__ == "__main__":
+    environ.setdefault('ESCDELAY', '25')
     draw_menu(args.title, menu)
     curses.endwin()
     exit(0)
