@@ -34,7 +34,7 @@ class FileListing:
 
     def run(self):
         c = ""
-        while c != self.ESC_KEY:
+        while c not in [ord("q"), self.ESC_KEY]:
             self.displayScreen()
             c = self.screen.getch()
             if c == curses.KEY_UP:
@@ -89,7 +89,7 @@ class FileListing:
             else:
                 self.screen.addch(self.maxY - 3, u, curses.ACS_HLINE)
         self.screen.addstr(self.maxY - 2, 1, 'ESC - Retour')
-        
+
         self.screen.refresh()
 
     # move highlight up/down one line
