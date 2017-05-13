@@ -88,7 +88,7 @@ class FileListing:
                 self.screen.addch(self.maxY - 3, u, curses.ACS_RTEE)
             else:
                 self.screen.addch(self.maxY - 3, u, curses.ACS_HLINE)
-        self.screen.addstr(self.maxY - 2, 1, 'ESC - Retour')
+        self.screen.addstr(self.maxY - 2, 1, '(Esc|q) - Back')
 
         self.screen.refresh()
 
