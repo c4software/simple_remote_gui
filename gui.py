@@ -65,7 +65,7 @@ def draw_menu(menu_name, datasource, sub_menu=False):
             screen.addch(maxY - 2, 31, curses.ACS_VLINE)
 
             if sub_menu:
-                screen.addstr(maxY - 2, 33, 'b - Back')
+                screen.addstr(maxY - 2, 33, 'q - Back')
             else:
                 screen.addstr(maxY - 2, 33, 'q - Quit')
 
@@ -111,7 +111,7 @@ def draw_menu(menu_name, datasource, sub_menu=False):
                 except Exception as e:
                     pass
             else:
-                if x == ord('a'):
+                if x == ord('o'):
                     ip = str(get_param('IP Adress :'), 'utf-8')
                     if ip:
                         utilisateur = str(get_param('User :'), 'utf-8')
