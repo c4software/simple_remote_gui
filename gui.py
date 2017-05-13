@@ -57,14 +57,15 @@ def draw_menu(menu_name, datasource, sub_menu=False):
 
             screen.addstr(maxY - 2, 1, mode, curses.A_BOLD)
             screen.addch(maxY - 2, 5, curses.ACS_VLINE)
-            screen.addstr(maxY - 2, 7, 'a - Via IP')
+            screen.addstr(maxY - 2, 7, 'o - Other')
             screen.addch(maxY - 2, 21, curses.ACS_VLINE)
 
+            # Display the mode (SSH or SCP)
             screen.addstr(maxY - 2, 23, 'c - {0}'.format(mode))
             screen.addch(maxY - 2, 31, curses.ACS_VLINE)
 
             if sub_menu:
-                screen.addstr(maxY - 2, 33, 'q - Retour')
+                screen.addstr(maxY - 2, 33, 'b - Back')
             else:
                 screen.addstr(maxY - 2, 33, 'q - Quit')
 
@@ -111,9 +112,9 @@ def draw_menu(menu_name, datasource, sub_menu=False):
                     pass
             else:
                 if x == ord('a'):
-                    ip = str(get_param('Adresse IP :'), 'utf-8')
+                    ip = str(get_param('IP Adress :'), 'utf-8')
                     if ip:
-                        utilisateur = str(get_param('Utilisateur :'), 'utf-8')
+                        utilisateur = str(get_param('User :'), 'utf-8')
                         curses.endwin()
                         if utilisateur:
                             system('ssh {0}@{1}'.format(utilisateur, ip))
